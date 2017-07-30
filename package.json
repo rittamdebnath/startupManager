@@ -12,7 +12,8 @@
     "start-react": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cors": "^2.8.4"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
@@ -28,7 +29,6 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-scripts": "1.0.10",
-    "cors": "^2.8.4",
     "nodemon": "^1.11.0"
   }
 }
