@@ -1,4 +1,5 @@
 const express = require('express');
+const compression = require('compression');
 const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
@@ -11,7 +12,7 @@ const index = require('./routes/index');
 const users = require('./routes/api');
 
 const app = express();
-
+app.use(compression(9));
 app.use(express.static(path.join(__dirname, 'public/build')));
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
