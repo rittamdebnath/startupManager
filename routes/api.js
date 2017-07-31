@@ -4,6 +4,7 @@ const router = express.Router();
 
 router.get('/current_user', (req, res) => {
   res.send(req.user);
+  // res.send(req.session);
 });
 
 router.get('/logout', (req, res) => {

@@ -2,7 +2,6 @@ const express = require('express');
 const compression = require('compression');
 const path = require('path');
 const logger = require('morgan');
-// const cookieParser = require('cookie-parser');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 const bodyParser = require('body-parser');
@@ -10,7 +9,6 @@ const cors = require('cors');
 const keys = require('./config/keys');
 const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
-
 require('./models/User');
 require('./config/passport');
 
@@ -45,7 +43,6 @@ app.use(cors(corsOptions));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(cookieParser());
 
 // ROUTES
 app.use('/', index);
