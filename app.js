@@ -14,7 +14,7 @@ require('./config/passport');
 
 mongoose.connect(keys.mongoURI);
 
-const index = require('./routes/index');
+// const index = require('./routes/index');
 const api = require('./routes/api');
 const auth = require('./routes/auth');
 
@@ -30,7 +30,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(compression(9));
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, 'public')));
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -45,7 +45,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // ROUTES
-app.use('/', index);
+// app.use('/', index);
 app.use('/api', api);
 app.use('/auth', auth);
 
