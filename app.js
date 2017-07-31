@@ -1,7 +1,6 @@
 const express = require('express');
 const compression = require('compression');
 const path = require('path');
-// const favicon = require('serve-favicon');
 const logger = require('morgan');
 // const cookieParser = require('cookie-parser');
 const cookieSession = require('cookie-session');
@@ -11,6 +10,7 @@ const cors = require('cors');
 const keys = require('./config/keys');
 const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
+
 require('./models/User');
 require('./config/passport');
 
@@ -21,6 +21,8 @@ const api = require('./routes/api');
 const auth = require('./routes/auth');
 
 const app = express();
+
+// Middleware
 app.use(
   cookieSession({
     maxAge: 30 * 24 * 60 * 60 * 1000,
@@ -35,17 +37,17 @@ app.use(express.static(path.join(__dirname, 'public/build')));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+// CORS Settings
 const corsOptions = { credentials: true, origin: 'http://localhost:3000' };
 app.options('*', cors(corsOptions));
 app.use(cors(corsOptions));
 
-// uncomment after placing your favicon in /public
-// app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 // app.use(cookieParser());
 
+// ROUTES
 app.use('/', index);
 app.use('/api', api);
 app.use('/auth', auth);
