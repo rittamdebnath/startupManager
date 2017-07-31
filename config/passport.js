@@ -25,7 +25,7 @@ passport.use(
     {
       clientID: keys.googleClientID,
       clientSecret: keys.googleClientSecret,
-      callbackURL: 'https://survmanager-production.herokuapp.com/auth/google/callback',
+      callbackURL: keys.googleCallbackURL,
       proxy: true,
     },
     (accessToken, refreshToken, profile, done) => {
