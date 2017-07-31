@@ -3,17 +3,32 @@ const compression = require('compression');
 const path = require('path');
 // const favicon = require('serve-favicon');
 const logger = require('morgan');
-const cookieParser = require('cookie-parser');
+// const cookieParser = require('cookie-parser');
+const cookieSession = require('cookie-session');
+const passport = require('passport');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const keys = require('./config/keys');
 const mongoose = require('mongoose');
-
+mongoose.Promise = require('bluebird');
+require('./models/User');
 require('./config/passport');
+
+mongoose.connect(keys.mongoURI);
+
 const index = require('./routes/index');
 const api = require('./routes/api');
 const auth = require('./routes/auth');
 
 const app = express();
+app.use(
+  cookieSession({
+    maxAge: 30 * 24 * 60 * 60 * 1000,
+    keys: [keys.cookieKey],
+  }),
+);
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(compression(9));
 app.use(express.static(path.join(__dirname, 'public/build')));
 // view engine setup
@@ -29,7 +44,7 @@ app.use(cors(corsOptions));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+// app.use(cookieParser());
 
 app.use('/', index);
 app.use('/api', api);
