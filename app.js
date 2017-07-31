@@ -14,7 +14,7 @@ require('./config/passport');
 
 mongoose.connect(keys.mongoURI);
 
-// const index = require('./routes/index');
+const index = require('./routes/index');
 const api = require('./routes/api');
 const auth = require('./routes/auth');
 
@@ -45,7 +45,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // ROUTES
-// app.use('/', index);
+app.use('/', index);
 app.use('/api', api);
 app.use('/auth', auth);
 
