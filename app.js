@@ -30,7 +30,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(compression(9));
-app.use(express.static(path.join(__dirname, 'public/build')));
+// app.use(express.static(path.join(__dirname, 'public/build')));
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
