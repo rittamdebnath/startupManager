@@ -9,7 +9,7 @@ router.get('/current_user', (req, res) => {
 
 router.get('/logout', (req, res) => {
   req.logout();
-  res.json(req.user);
+  res.redirect('/');
 });
 
 module.exports = router;

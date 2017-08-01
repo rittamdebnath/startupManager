@@ -5,7 +5,6 @@ const logger = require('morgan');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 const bodyParser = require('body-parser');
-// const cors = require('cors');
 const keys = require('./config/keys');
 const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
@@ -34,11 +33,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
-/* // CORS Settings
-const corsOptions = { credentials: true, origin: 'http://localhost:3000' };
-app.options('*', cors(corsOptions));
-app.use(cors(corsOptions)); */
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
