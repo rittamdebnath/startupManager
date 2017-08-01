@@ -12,10 +12,10 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser((id, done) => {
   // console.log(`id: ${id}`);
   User.findById(id)
-    .then((user) => {
+    .then(user => {
       done(null, user);
     })
-    .catch((error) => {
+    .catch(error => {
       console.log(`Error: ${error}`);
     });
 });
@@ -28,25 +28,19 @@ passport.use(
       callbackURL: keys.googleCallbackURL,
       proxy: true,
     },
-    (accessToken, refreshToken, profile, done) => {
-      User.findOne({ googleId: profile.id })
-        .then((existingUser) => {
-          if (existingUser) {
-            console.log('Already exist');
-            done(null, existingUser);
-          } else {
-            new User({
-              googleId: profile.id,
-            })
-              .save()
-              .then((user) => {
-                done(null, user);
-              });
-          }
-        })
-        .catch((error) => {
-          console.log(`Error: ${error}`);
-        });
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        const existingUser = await User.findOne({ googleId: profile.id });
+        if (existingUser) {
+          return done(null, existingUser);
+        }
+        const user = await new User({
+          googleId: profile.id,
+        }).save();
+        done(null, user);
+      } catch (error) {
+        console.log('Error ' + error);
+      }
     },
   ),
 );
