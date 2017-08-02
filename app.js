@@ -13,11 +13,14 @@ require('./config/passport');
 
 mongoose.connect(keys.mongoURI);
 
-const index = require('./routes/index');
-const api = require('./routes/api');
 const auth = require('./routes/auth');
+const billing = require('./routes/billing');
 
 const app = express();
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
 // Middleware
 app.use(
@@ -30,17 +33,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(compression(9));
 app.use(express.static(path.join(__dirname, 'public')));
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // ROUTES
-app.use('/', index);
-app.use('/api', api);
+app.use('/billing', billing);
 app.use('/auth', auth);
 
 // catch 404 and forward to error handler

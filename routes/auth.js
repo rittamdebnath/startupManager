@@ -9,4 +9,14 @@ router.get('/google/callback', passport.authenticate('google'), (req, res) => {
   res.redirect('/surveys');
 });
 
+router.get('/current_user', (req, res) => {
+  res.json(req.user);
+  // res.send(req.session);
+});
+
+router.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/');
+});
+
 module.exports = router;
