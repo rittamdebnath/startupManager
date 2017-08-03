@@ -4,7 +4,7 @@
 /node_modules
 
 #client build files
-/client/build
+# /client/build
 
 # testing
 /coverage
