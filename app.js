@@ -21,9 +21,9 @@ const app = express();
 if (process.env.NODE_ENV === 'production') {
   // Express will serv up production assets
   app.use(express.static(path.join(__dirname, 'client/build')));
-  app.get('*', (req, res) => {
+  /*   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-  });
+  }); */
 }
 
 // view engine setup
