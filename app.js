@@ -15,7 +15,6 @@ mongoose.connect(keys.mongoURI);
 
 const auth = require('./routes/auth');
 const billing = require('./routes/billing');
-const index = require('./routes/index');
 
 const app = express();
 
@@ -48,7 +47,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // ROUTES
 app.use('/billing', billing);
 app.use('/auth', auth);
-app.use('/', index);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
