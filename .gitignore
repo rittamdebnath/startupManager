@@ -3,6 +3,9 @@
 # dependencies
 /node_modules
 
+#client build files
+/client/build
+
 # testing
 /coverage
 
